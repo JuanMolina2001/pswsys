@@ -16,6 +16,7 @@ The project file structure includes a directory named `assets/lang`, where langu
    - Translate all text strings into your new language. Ensure that you maintain the same structure as the original file.
 
    ### Example File for French (`fr.json`):
+   note: the last column in pswList must always be hidden 
    ```json
    {
        "name": "Français",
@@ -31,7 +32,7 @@ The project file structure includes a directory named `assets/lang`, where langu
            "psw": "Entrez votre mot de passe",
            "submit": "Se Connecter",
            "pswList": {
-               "columns": ["Source", "Utilisateur/Email", "Mot de Passe", "caché"],
+               "columns": ["Source", "Utilisateur/Email", "Mot de Passe", "hidden"],
                "add": "Ajouter",
                "reload": "Recharger",
                "passwordMng": {
