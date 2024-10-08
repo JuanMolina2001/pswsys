@@ -1,9 +1,6 @@
 from cryptography.fernet import Fernet
 import platform
-import hashlib
-import base64
-
-
+from playsound import playsound
 def auth(password: str):
     try:
         if platform.system() == "Windows":
@@ -67,6 +64,9 @@ def validateKey(key):
 
 def getKey(password):
     try:
+        import hashlib
+        import base64
+
         hashedPassword = hashlib.sha256(password.encode()).digest()
         key = base64.urlsafe_b64encode(hashedPassword[:32])
         return key
@@ -92,3 +92,41 @@ class dataEncrypt:
                 raise Exception("Invalid key")
         except Exception as e:
             raise Exception(str(e))
+
+
+def verify(func):
+    def wrapper(self, *args, **kwargs):
+        from tkinter import Toplevel, Label, Entry, messagebox,PhotoImage,Button,Frame
+        modal = Toplevel(self.window)
+        modal.overrideredirect(True)
+        modal.attributes("-topmost", True) 
+        modal.title("Password")
+        modal.focus_force()
+        modal.grab_set()
+        height = 200
+        width = 300
+        screen_width = modal.winfo_screenwidth()
+        screen_height = modal.winfo_screenheight()
+
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+        modal.geometry(f'{width}x{height}+{x}+{y}')
+
+        self.shield_image = PhotoImage(file="src/assets/shield-lock.png")
+        password = Entry(modal, show="*")
+        Label(modal, image=self.shield_image).pack(pady=10)
+        password.focus_force()
+        password.pack(pady=10)
+        Label(modal, text="Write the user password of windows").pack(pady=10)
+        def onSubmit():
+            if auth(password.get()):
+                modal.destroy()
+                func(self, *args, **kwargs)
+            else:
+                playsound("src/assets/error.wav")
+        frame_btn = Frame(modal)
+        frame_btn.pack(pady=10)
+        Button(frame_btn, text="Submit",command=onSubmit).grid(row=0, column=0, padx=10)
+        Button(frame_btn, text="Cancel",command=modal.destroy).grid(row=0, column=1,padx=10)
+        password.bind("<Return>", lambda _: onSubmit())
+    return wrapper
