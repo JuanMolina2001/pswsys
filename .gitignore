@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 *.key
 *.enc
+build/
+dist/
+.vscode/

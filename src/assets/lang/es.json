@@ -1,0 +1,30 @@
+{
+    "name":"Español",
+    "createPsw":{
+        "title":"Crea una Contraseña",
+        "saveAs":"Selecciona una carpeta para guardar la contraseña",
+        "passwordsDoNotMatch":"Las contraseñas no coinciden",
+        "passwordCannotBeEmpty":"La contraseña no puede estar vacía",
+        "passwordSavedSuccessfully":"Contraseña guardada con éxito",
+        "save":"Guardar"
+    },
+    "Login":{
+        "psw":"Ingresa tu contraseña",
+        "submit":"Ingresar",
+        "pswList":{
+            "columns" :["Fuente", "Usuario/Email", "Contraseña", "hidden"],
+            "add": "Añadir",
+            "reload": "Recargar",
+            "passwordMng":{
+                "back":"Volver",
+                "copy":"Copiar",
+                "delete":"Eliminar",
+                "passwordCannotBeEmpty":"La contraseña no puede estar vacía",
+                "verifyTitle":"Escribe la contraseña de Usuario",
+                "cancel":"Cancelar",
+                "submit":"Aceptar"
+            }
+        }
+    }
+
+}
