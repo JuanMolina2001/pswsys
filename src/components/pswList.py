@@ -1,8 +1,7 @@
-from tkinter import ttk,Frame,Tk
-from ..utils import auth
+from tkinter import ttk,Frame,Tk,Button
 from .passwordMg import PasswordMg
 class PswList:
-    def __init__(self, listPasswords: list, window,key):
+    def __init__(self, listPasswords: list, window:Tk,key,reload):
         self.window:Tk = window
         self.container = Frame(window)
         self.listPasswords = listPasswords
@@ -25,10 +24,14 @@ class PswList:
         self.list_box.configure(yscroll=scrollbar.set)
         def onSelection(_):
             if self.list_box.selection():
-                self.container.forget()
                 PasswordMg(self.list_box.selection(),self.list_box,window,self.container,key)
         self.list_box.bind("<<TreeviewSelect>>", onSelection)
         self.container.pack()
         self.list_box.pack()
+        btn_frame = Frame(self.container)
+        Button(btn_frame, text="reload", command=lambda: reload(self.container)).grid(column=0, row=0, padx=10, pady=10)
+        Button(btn_frame, text="Add", command=lambda:PasswordMg(None,self.list_box,window,self.container,key)).grid(column=1, row=0, padx=10, pady=10)
+        btn_frame.pack()
+
 
     
