@@ -19,7 +19,10 @@
                 "back":"Volver",
                 "copy":"Copiar",
                 "delete":"Eliminar",
-                "passwordCannotBeEmpty":"La contraseña no puede estar vacía"
+                "passwordCannotBeEmpty":"La contraseña no puede estar vacía",
+                "verifyTitle":"Escribe la contraseña de Usuario",
+                "cancel":"Cancelar",
+                "submit":"Aceptar"
             }
         }
     }
