@@ -3,15 +3,20 @@ from .pswList import PswList
 from ..utils import decrypt,getKey
 import json
 class Login:
-    def __init__(self, window: ttk):
+    def __init__(self, window: ttk,settings):
+        if settings['lang'] == 'en':
+            self.lang = {}
+        else:
+            with open(f'src/assets/lang/{settings["lang"]}.json', 'r',encoding='utf-8') as f:
+                self.lang = json.load(f)['Login']
         self.window = window
         self.container = Frame(window)
-        Label(self.container, text="PSW").pack()
+        Label(self.container, text=self.lang.get('psw', "Enter your password")).pack()
         self.passwordInp = Entry(self.container, show="*")
         self.passwordInp.focus()
         self.passwordInp.pack(pady=10)
         self.passwordInp.bind("<Return>", lambda _: self.submit())
-        submitButton = Button(self.container, text="Submit", command=self.submit)
+        submitButton = Button(self.container, text=self.lang.get('submit', "Enter"), command=self.submit)
         submitButton.pack(pady=10)
         self.container.pack()
     def submit(self):
@@ -22,7 +27,7 @@ class Login:
             def reload(List_container):
                 List_container.destroy()
                 self.submit()
-            PswList(decryptedData, self.window,key,reload)
+            PswList(decryptedData, self.window,key,reload,self.lang['pswList'])
             self.container.forget()
         except Exception as e:
             messagebox.showerror("Error", str(e))
