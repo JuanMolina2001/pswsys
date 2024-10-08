@@ -70,8 +70,11 @@ class PasswordMg:
         self.password.pack()
         Button(
             self.container,
-            text="Submit",
+            text=self.lang.get("submit", "Accept"),
             command=self.add,
+        ).pack()
+        Button(
+            self.container, text=self.lang.get("cancel", "Cancel"), command=self.back
         ).pack()
 
     @verify

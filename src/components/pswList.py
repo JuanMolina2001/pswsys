@@ -41,7 +41,7 @@ class PswList:
                     self.container,
                     key,
                     self.columns,
-                    self.lang["passwordMng"],
+                    self.lang.get("passwordMng",{}),
                 )
 
         self.list_box.bind("<<TreeviewSelect>>", onSelection)
@@ -63,7 +63,7 @@ class PswList:
                 self.container,
                 key,
                 self.columns,
-                self.lang["passwordMng"],
+                self.lang.get("passwordMng",{}),
             ),
         ).grid(column=1, row=0, padx=10, pady=10)
         btn_frame.pack()

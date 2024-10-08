@@ -1,6 +1,7 @@
 from cryptography.fernet import Fernet
 import platform
 from playsound import playsound
+
 def auth(password: str):
     try:
         if platform.system() == "Windows":
@@ -96,7 +97,7 @@ class dataEncrypt:
 
 def verify(func):
     def wrapper(self, *args, **kwargs):
-        from tkinter import Toplevel, Label, Entry, messagebox,PhotoImage,Button,Frame
+        from tkinter import Toplevel, Label, Entry, PhotoImage,Button,Frame
         modal = Toplevel(self.window)
         modal.overrideredirect(True)
         modal.attributes("-topmost", True) 
@@ -112,21 +113,25 @@ def verify(func):
         y = (screen_height // 2) - (height // 2)
         modal.geometry(f'{width}x{height}+{x}+{y}')
 
-        self.shield_image = PhotoImage(file="src/assets/shield-lock.png")
+        self.shield_image = PhotoImage(file="src/assets/images/shield-lock.png")
         password = Entry(modal, show="*")
         Label(modal, image=self.shield_image).pack(pady=10)
         password.focus_force()
         password.pack(pady=10)
-        Label(modal, text="Write the user password of windows").pack(pady=10)
+        Label(modal, text=self.lang.get("verifyTitle","Write the User password ")).pack(pady=10)
         def onSubmit():
             if auth(password.get()):
                 modal.destroy()
                 func(self, *args, **kwargs)
             else:
-                playsound("src/assets/error.wav")
+                try:
+                    playsound("src\\assets\\sounds\\error.wav")
+                except Exception as e:
+                    print(str(e))
         frame_btn = Frame(modal)
         frame_btn.pack(pady=10)
-        Button(frame_btn, text="Submit",command=onSubmit).grid(row=0, column=0, padx=10)
-        Button(frame_btn, text="Cancel",command=modal.destroy).grid(row=0, column=1,padx=10)
+        Button(frame_btn, text=self.lang.get("submit","Accept"),command=onSubmit).grid(row=0, column=0,padx=10)
+        Button(frame_btn, text=self.lang.get("cancel","Cancel"),command=lambda:modal.destroy()).grid(row=0, column=1,padx=10)
         password.bind("<Return>", lambda _: onSubmit())
+        modal.after(100, lambda:playsound("src\\assets\\sounds\\alert.wav"))
     return wrapper
