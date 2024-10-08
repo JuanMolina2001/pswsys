@@ -4,6 +4,7 @@ import json
 from .login import Login
 class CreatePassword:
     def __init__(self, window: ttk,settings):
+        self.settings = settings
         if settings['lang'] == 'system':
             import locale
             settings['lang'] = locale.getdefaultlocale()[0].split('_')[0]
@@ -37,7 +38,7 @@ class CreatePassword:
             data = json.dumps(json.loads('[]')).encode()
             f.write(encrypt(data, key))
         self.container.destroy()
-        Login(self.window)
+        Login(self.window,self.settings)
     def submit(self, psw1, psw2):
         try:
             if psw1.get() != psw2.get() :
