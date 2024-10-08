@@ -34,7 +34,7 @@ class CreatePassword:
             with open(filename, "wb") as f:
                 f.write(key)
         with open('data.enc', 'wb') as f:
-            data = json.dumps(json.loads('[{"source":"steam","user":"juanm","password":"123456789"}]')).encode()
+            data = json.dumps(json.loads('[]')).encode()
             f.write(encrypt(data, key))
         self.container.destroy()
         Login(self.window)
