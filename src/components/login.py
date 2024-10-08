@@ -6,13 +6,20 @@ import json
 
 class Login:
     def __init__(self, window: ttk, settings):
+        if settings["lang"] == "system":
+            import locale
+
+            settings["lang"] = locale.getdefaultlocale()[0].split("_")[0]
         if settings["lang"] == "en":
             self.lang = {}
         else:
-            with open(
-                f'src/assets/lang/{settings["lang"]}.json', "r", encoding="utf-8"
-            ) as f:
-                self.lang = json.load(f)["Login"]
+            try:
+                with open(
+                    f'src/assets/lang/{settings["lang"]}.json', "r", encoding="utf-8"
+                ) as f:
+                    self.lang = json.load(f)["Login"]
+            except Exception as e:
+                self.lang = {}
         self.window = window
         self.container = Frame(window)
         Label(self.container, text=self.lang.get("psw", "Enter your password")).pack()

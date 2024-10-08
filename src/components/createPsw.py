@@ -4,6 +4,10 @@ import json
 from .login import Login
 class CreatePassword:
     def __init__(self, window: ttk,settings):
+        self.settings = settings
+        if settings['lang'] == 'system':
+            import locale
+            settings['lang'] = locale.getdefaultlocale()[0].split('_')[0]
         if settings['lang'] == 'en':
             self.lang = {}
         else:
@@ -31,10 +35,10 @@ class CreatePassword:
             with open(filename, "wb") as f:
                 f.write(key)
         with open('data.enc', 'wb') as f:
-            data = json.dumps(json.loads('[{"source":"steam","user":"juanm","password":"123456789"}]')).encode()
+            data = json.dumps(json.loads('[]')).encode()
             f.write(encrypt(data, key))
         self.container.destroy()
-        Login(self.window)
+        Login(self.window,self.settings)
     def submit(self, psw1, psw2):
         try:
             if psw1.get() != psw2.get() :
