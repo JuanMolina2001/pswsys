@@ -4,6 +4,9 @@ import json
 from .login import Login
 class CreatePassword:
     def __init__(self, window: ttk,settings):
+        if settings['lang'] == 'system':
+            import locale
+            settings['lang'] = locale.getdefaultlocale()[0].split('_')[0]
         if settings['lang'] == 'en':
             self.lang = {}
         else:
