@@ -19,11 +19,10 @@ class Login:
             key = getKey(self.passwordInp.get())
             data = open('data.enc', 'r').read()
             decryptedData = json.loads(decrypt(data, key))
-            pswList = PswList(decryptedData, self.window,key)
-            def reload():
-                pswList.container.destroy()
+            def reload(List_container):
+                List_container.destroy()
                 self.submit()
-            Button(pswList.container, text="reload", command=reload).pack()
+            PswList(decryptedData, self.window,key,reload)
             self.container.forget()
         except Exception as e:
             messagebox.showerror("Error", str(e))
