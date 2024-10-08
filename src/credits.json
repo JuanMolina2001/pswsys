@@ -1,18 +1,29 @@
 [
     {
-        "sound_url": "https://freesound.org/people/KIZILSUNGUR/sounds/72127/",
-        "sound_name": "SweetAlertSound3.wav",
+        "type": "audio",
+        "url": "https://freesound.org/people/KIZILSUNGUR/sounds/72127/",
+        "name": "SweetAlertSound3.wav",
         "author_url": "https://freesound.org/people/KIZILSUNGUR/",
         "author_name": "KIZILSUNGUR",
         "license_url": "http://creativecommons.org/publicdomain/zero/1.0/",
         "license_name": "Creative Commons 0"
     },
     {
-        "sound_url": "https://freesound.org/people/distillerystudio/sounds/327736/",
-        "sound_name": "Error_03.wav",
+        "type": "audio",
+        "url": "https://freesound.org/people/distillerystudio/sounds/327736/",
+        "name": "Error_03.wav",
         "author_url": "https://freesound.org/people/distillerystudio/",
         "author_name": "distillerystudio",
         "license_url": "http://creativecommons.org/licenses/by/3.0/",
         "license_name": "Attribution 3.0"
+    },
+    {
+        "type": "image",
+        "url": "https://icons8.com/icon/azQrK4GjnaDj/password",
+        "name": "password",
+        "author_url": "https://icons8.com",
+        "author_name": "Icons8",
+        "license_url": "",
+        "license_name": ""
     }
 ]

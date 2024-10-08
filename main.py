@@ -9,6 +9,7 @@ def main():
     window.title("PSW")
     window.geometry("500x300")
     window.resizable(False, False)
+    window.iconbitmap('logo.ico')
     with open('src/settings.json', 'r') as f:
         settings = json.load(f)
     def reload():
