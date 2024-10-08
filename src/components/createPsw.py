@@ -1,7 +1,5 @@
 from tkinter import Entry, filedialog, messagebox, Button, Frame, ttk,Label
-import hashlib
-import base64
-from ..utils import encrypt
+from ..utils import encrypt,getKey
 import json
 from .login import Login
 class CreatePassword:
@@ -40,8 +38,7 @@ class CreatePassword:
                 messagebox.showerror("Error", "Password cannot be empty")
             else:
                 password = psw1.get()
-                hashedPassword = hashlib.sha256(password.encode()).digest() 
-                key = base64.urlsafe_b64encode(hashedPassword[:32])
+                key = getKey(password)
                 self.savePassword(key)
                 messagebox.showinfo("Success", "Password saved successfully")
         except Exception as e:

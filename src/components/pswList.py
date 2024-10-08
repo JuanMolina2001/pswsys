@@ -1,10 +1,10 @@
-from tkinter import ttk,Frame,Tk,Label,Entry,Button,Toplevel,messagebox
-from ..utils import auth
+from tkinter import ttk,Frame,Tk,Button
 from .passwordMg import PasswordMg
 class PswList:
-    def __init__(self, listPasswords: list, window):
+    def __init__(self, listPasswords: list, window:Tk,key,reload):
         self.window:Tk = window
         self.container = Frame(window)
+        self.listPasswords = listPasswords
         columns = ("Source","User/Email", "Password", "hidden")
         self.list_box = ttk.Treeview(self.container, columns=columns, show='headings')
         for col in columns:
@@ -14,16 +14,24 @@ class PswList:
             self.list_box.heading(col, text=col.title(), anchor="center")
             self.list_box.column(col, anchor="center", width=150)
         for password in listPasswords:
-            source = password['source'] or ""
-            user = password['user'] or ""
-            value = password['password']
-            psw = '*' * len(password['password'])
+            source = str(password['source']) or ""
+            user = str(password['user']) or ""
+            value = str(password['password'])
+            psw = '*' * len(str(password['password']))
             self.list_box.insert('', 'end', values=(source,user, psw,value)) 
 
         scrollbar = ttk.Scrollbar(self.container, orient="vertical", command=self.list_box.yview)
         self.list_box.configure(yscroll=scrollbar.set)
-        self.list_box.bind("<<TreeviewSelect>>", lambda event :PasswordMg(self.window,self.list_box.item(self.list_box.selection()[0])))
+        def onSelection(_):
+            if self.list_box.selection():
+                PasswordMg(self.list_box.selection(),self.list_box,window,self.container,key)
+        self.list_box.bind("<<TreeviewSelect>>", onSelection)
         self.container.pack()
         self.list_box.pack()
+        btn_frame = Frame(self.container)
+        Button(btn_frame, text="reload", command=lambda: reload(self.container)).grid(column=0, row=0, padx=10, pady=10)
+        Button(btn_frame, text="Add", command=lambda:PasswordMg(None,self.list_box,window,self.container,key)).grid(column=1, row=0, padx=10, pady=10)
+        btn_frame.pack()
+
 
     
